@@ -1,1 +1,2 @@
 # TnecnetOO
+这是一款用wpf做的聊天软件，聊天功能的实现主要采用了leancloud的即时通讯sdk
