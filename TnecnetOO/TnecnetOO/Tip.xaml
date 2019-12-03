@@ -1,0 +1,60 @@
+﻿<Window x:Class="TnecnetOO.Tip"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TnecnetOO"
+        mc:Ignorable="d"
+        AllowsTransparency="True"
+        Background="{x:Null}"
+        WindowStyle="None" ResizeMode="NoResize"
+        WindowStartupLocation="Manual" 
+        MouseDown="Window_MouseDown"
+        MouseEnter="Window_MouseEnter"
+        MouseLeave="Window_MouseLeave"
+        Title="提醒" Icon="Icons/icons8-bell-96.png"
+        Height="100" Width="150">
+    <Window.Resources>
+        <Storyboard x:Key="ClosedStoryboard" Storyboard.TargetName="grid">
+            <DoubleAnimation From="0" To="1" Duration="0:0:0.2" Storyboard.TargetProperty="OpacityMask.(GradientBrush.GradientStops)[1].Offset"/>
+            <DoubleAnimation From="0" To="1" Duration="0:0:0" BeginTime="0:0:0.2" Storyboard.TargetProperty="OpacityMask.(GradientBrush.GradientStops)[2].Offset"/>
+            <ColorAnimation To="#00000000" Duration="0" Storyboard.TargetProperty="OpacityMask.(GradientBrush.GradientStops)[2].Color"/>
+        </Storyboard>
+        <LinearGradientBrush x:Key="ClosedBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Color="#FF000000" Offset="1"/>
+            <GradientStop Color="#FF000000" Offset="1"/>
+            <GradientStop Color="#FF000000" Offset="0"/>
+        </LinearGradientBrush>
+    </Window.Resources>
+    <Grid Name="grid">
+        <Grid.OpacityMask>
+            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                <GradientStop Color="#00000000" Offset="0"/>
+                <GradientStop Color="#00000000" Offset="1"/>
+                <GradientStop Color="#00000000" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.OpacityMask>
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="Window.Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation From="1" To="0" Duration="0:0:0.2" Storyboard.TargetProperty="OpacityMask.(GradientBrush.GradientStops)[1].Offset"/>
+                            <DoubleAnimation From="1" To="0" Duration="0:0:0" BeginTime="0:0:0.2" Storyboard.TargetProperty="OpacityMask.(GradientBrush.GradientStops)[2].Offset"/>
+                            <ColorAnimation To="#FF000000" Duration="0" Storyboard.TargetProperty="OpacityMask.(GradientBrush.GradientStops)[2].Color"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Grid.Triggers>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.RowSpan="2" BorderBrush="Gray" BorderThickness="2" CornerRadius="20" Opacity="1" Background="White"/>
+        <Image Grid.Row="0" Source="Icons/icons8-bell-96.png" Width="20" Height="20" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+        <TextBlock Name="tiptitle" Text="测试" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="35,0,0,0"/>
+        <TextBlock Grid.Row="1" Name="tip" Text="测试测试测试" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,10"/>
+    </Grid>
+</Window>

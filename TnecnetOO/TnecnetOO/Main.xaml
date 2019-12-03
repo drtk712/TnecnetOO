@@ -1,0 +1,139 @@
+﻿<Window x:Class="TnecnetOO.Main"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TnecnetOO"
+        Background="{x:Null}"
+      WindowStyle="None" AllowsTransparency="True"
+      ResizeMode="NoResize"
+      Loaded="Page_Loaded"
+      WindowStartupLocation="CenterScreen"
+      Icon="Icons/icons8-chat-64.png"
+      Height="550" Width="550"
+      MouseLeftButtonDown="Window_MouseLeftButtonDown"
+      Closing="Window_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        <Border Grid.RowSpan="5" BorderBrush="Gray" BorderThickness="3"  CornerRadius="20" Opacity="1" Background="White"/>
+        <TextBlock Name="friendname" Grid.Row="0" Text="测试人员" FontSize="16" Foreground="Black" VerticalAlignment="Center" Margin="20,0,0,0" FontWeight="ExtraBold"/>
+        <Button Name="btnClose" Grid.Row="0" Click="BtnClose_Click" HorizontalAlignment="Right" Margin="0,5,10,0" Width="25" Height="25">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate x:Name="btnup" TargetType="{x:Type Button}">
+                                <Image x:Name="bd" Source="Icons/icons8-close.png">
+                                    <Image.Style>
+                                        <Style TargetType="{x:Type Image}">
+                                            <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter TargetName="bd" Property="RenderTransform">
+                                            <Setter.Value>
+                                                <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="true">
+                                        <Setter TargetName="bd" Property="Source" Value="Icons/icons8-close-click.png"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+        <ListBox Name="received" Grid.Row="1" ScrollViewer.CanContentScroll="False" BorderThickness="0,1,0,1" Background="Transparent">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="MaxWidth" Value="350"/>
+                    <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
+                    <Setter Property="Margin" Value="10,5,10,0"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="HorizontalAlignment" Value="{Binding Alignment}"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                <Grid>
+                                    <Border CornerRadius="4" Background="{Binding Background}">
+                                        <TextBlock Text="{Binding Text}" FontSize="14" TextWrapping="Wrap" Margin="5"/>
+                                    </Border>
+                                    <Image Source="{Binding Image}"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+        <Button Name="btnsendimage" Grid.Row="2" Click="Btnsendimage_Click" Width="30" Height="30"  Margin="20,0,0,0"
+                HorizontalAlignment="Left">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate x:Name="btnup" TargetType="{x:Type Button}">
+                                <Image x:Name="bd" Source="Icons/icons8-image.png">
+                                    <Image.Style>
+                                        <Style TargetType="{x:Type Image}">
+                                            <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter TargetName="bd" Property="RenderTransform">
+                                            <Setter.Value>
+                                                <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="true">
+                                        <Setter TargetName="bd" Property="Source" Value="Icons/icons8-image-click.png"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+
+        <TextBox Name="send" Grid.Row="3" TextWrapping="Wrap" Margin="3,0,3,0" BorderThickness="0,1,0,0" Background="Transparent" FontSize="16" 
+                 ScrollViewer.CanContentScroll="False" KeyDown="Send_KeyDown"/>
+        <Button Name="btnsend" Grid.Row="3" Click="Btnsend_Click" Width="45" Height="45" BorderThickness="0" Margin="0,0,10,0"
+                VerticalAlignment="Bottom" HorizontalAlignment="Right">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate x:Name="btnup" TargetType="{x:Type Button}">
+                                <Image x:Name="bd" Source="Icons/icons8-send.png"/>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter TargetName="bd" Property="Source" Value="Icons/icons8-send-over.png"/>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="true">
+                                        <Setter TargetName="bd" Property="Source" Value="Icons/icons8-send-click.png"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+    </Grid>
+</Window>

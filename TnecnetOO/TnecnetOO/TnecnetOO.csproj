@@ -35,8 +35,36 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AssemblyLister, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LeanCloud.Storage.2019.9.17.1\lib\net45\AssemblyLister.dll</HintPath>
+    </Reference>
+    <Reference Include="LeanCloud.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LeanCloud.Storage.2019.9.17.1\lib\net45\LeanCloud.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="LeanCloud.LiveQuery, Version=1.0.7211.6715, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LeanCloud.LiveQuery.2019.9.29.1\lib\net45\LeanCloud.LiveQuery.dll</HintPath>
+    </Reference>
+    <Reference Include="LeanCloud.Realtime, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LeanCloud.Realtime.2019.9.25.1\lib\net45\LeanCloud.Realtime.dll</HintPath>
+    </Reference>
+    <Reference Include="LeanCloud.Storage, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LeanCloud.Storage.2019.9.17.1\lib\net45\LeanCloud.Storage.dll</HintPath>
+    </Reference>
+    <Reference Include="PCLStorage, Version=1.0.2.0, Culture=neutral, PublicKeyToken=286fe515a2c35b64, processorArchitecture=MSIL">
+      <HintPath>..\packages\PCLStorage.1.0.2\lib\net45\PCLStorage.dll</HintPath>
+    </Reference>
+    <Reference Include="PCLStorage.Abstractions, Version=1.0.2.0, Culture=neutral, PublicKeyToken=286fe515a2c35b64, processorArchitecture=MSIL">
+      <HintPath>..\packages\PCLStorage.1.0.2\lib\net45\PCLStorage.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -45,6 +73,12 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Websockets.Net, Version=1.0.0.8, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Websockets.Pcl.1.1.9\lib\net45\Websockets.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="WebSockets.PCL, Version=1.0.0.8, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Websockets.Pcl.1.1.9\lib\net45\WebSockets.PCL.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -55,20 +89,57 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Compile Include="Register.xaml.cs">
+      <DependentUpon>Register.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tip.xaml.cs">
+      <DependentUpon>Tip.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserList.cs" />
+    <Page Include="Addfriend.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="Addfriend.xaml.cs">
+      <DependentUpon>Addfriend.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Page Include="Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Main.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Register.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tip.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Main.xaml.cs">
+      <DependentUpon>Main.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Message.cs" />
+    <Compile Include="NoticeMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -86,6 +157,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -94,5 +166,39 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8-add-user-click.png" />
+    <Resource Include="Icons\icons8-add-user-group-man-man.png" />
+    <Resource Include="Icons\icons8-add-user-over.png" />
+    <Resource Include="Icons\icons8-add-user.png" />
+    <Resource Include="Icons\icons8-bell-96.png" />
+    <Resource Include="Icons\icons8-chat-64.png" />
+    <Resource Include="Icons\icons8-chat-message.png" />
+    <Resource Include="Icons\icons8-close-click.png" />
+    <Resource Include="Icons\icons8-close.png" />
+    <Resource Include="Icons\icons8-image-click.png" />
+    <Resource Include="Icons\icons8-image.png" />
+    <Resource Include="Icons\icons8-login-click.png" />
+    <Resource Include="Icons\icons8-login-over.png" />
+    <Resource Include="Icons\icons8-login.png" />
+    <Resource Include="Icons\icons8-ok.png" />
+    <Resource Include="Icons\icons8-registered-trademark.png" />
+    <Resource Include="Icons\icons8-send-click.png" />
+    <Resource Include="Icons\icons8-send-over.png" />
+    <Resource Include="Icons\icons8-send.png" />
+    <Resource Include="Icons\icons8-signin-click.png" />
+    <Resource Include="Icons\icons8-signin-over.png" />
+    <Resource Include="Icons\icons8-signin.png" />
+    <Resource Include="Icons\icons8-wrong.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\favicon-20191030042325178.ico" />
+    <Resource Include="Images\MainWindowBg.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
 </Project>

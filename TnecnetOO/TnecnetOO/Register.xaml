@@ -1,0 +1,159 @@
+﻿<Window x:Class="TnecnetOO.Register"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TnecnetOO"
+        WindowStyle="None" AllowsTransparency="True"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Title="注册账号" Icon="Icons/icons8-chat-64.png"
+        Background="{x:Null}"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        Width="300" Height="300"
+        KeyDown="Window_KeyDown"
+        Loaded="Page_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.RowSpan="6" BorderBrush="Gray" BorderThickness="3" CornerRadius="20" Margin="10" Opacity="1" Background="White"/>
+        <Button Name="btnClose" Grid.Row="0" Click="BtnClose_Click"  Width="25" Height="25" Margin="230,0,0,10">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate x:Name="btnup" TargetType="{x:Type Button}">
+                                <Image x:Name="bd" Source="Icons/icons8-close.png">
+                                    <Image.Style>
+                                        <Style TargetType="{x:Type Image}">
+                                            <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter TargetName="bd" Property="RenderTransform">
+                                            <Setter.Value>
+                                                <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="true">
+                                        <Setter TargetName="bd" Property="Source" Value="Icons/icons8-close-click.png"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Image Grid.Row="0" VerticalAlignment="Center" Width="60" Height="60" Margin="0,20,0,0" Source="Icons/icons8-registered-trademark.png"/>
+        <TextBox x:Name="username" Grid.Row="1" Width="200" Height="23" VerticalAlignment="Center" BorderThickness="0,0,0,1" FontSize="16" HorizontalContentAlignment="Center"
+                 LostFocus="Username_LostFocus"/>
+        <TextBlock Name="usernametip" Foreground="DarkGray" Grid.Row="1"  IsHitTestVisible="False" HorizontalAlignment="Center" Height="23" Text="请输入姓名" VerticalAlignment="Center"
+                   FontFamily="Microsoft YaHei" FontSize="12">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName=username}" Value="">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBlock Name="usernamewarning" Grid.Row="1" FontSize="8" Foreground="Red" Text="测试测试测试测试" HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="Collapsed"/>
+        <Image Name="usernameimg" Grid.Row="1" Width="30" Height="30" Margin="230,0,0,0"/>
+
+        <TextBox x:Name="password" Grid.Row="2" Width="200" Height="23" VerticalAlignment="Center" BorderThickness="0,0,0,1" FontSize="16" HorizontalContentAlignment="Center"
+                 LostFocus="Password_LostFocus"/>
+        <TextBlock Name="passwordtip" Foreground="DarkGray" Grid.Row="2"  IsHitTestVisible="False" HorizontalAlignment="Center" Height="23" Text="请输入密码" VerticalAlignment="Center"
+                   FontFamily="Microsoft YaHei" FontSize="12">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName=password}" Value="">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBlock Name="passwordwarning" Grid.Row="2" FontSize="8" Foreground="Red" Text="测试测试测试测试" HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="Collapsed"/>
+        <Image Name="passwordimg" Grid.Row="2" Width="30" Height="30" Margin="230,0,0,0"/>
+
+
+        <TextBox x:Name="email" Grid.Row="3" Width="200" Height="23" VerticalAlignment="Center" BorderThickness="0,0,0,1" FontSize="16" HorizontalContentAlignment="Center"
+                 LostFocus="Email_LostFocus"/>
+        <TextBlock Name="emailtip" Foreground="DarkGray" Grid.Row="3"  IsHitTestVisible="False" HorizontalAlignment="Center" Height="23" Text="请输入邮箱" VerticalAlignment="Center"
+                   FontFamily="Microsoft YaHei" FontSize="12">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName=email}" Value="">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBlock Name="emailwarning" Grid.Row="3" FontSize="8" Foreground="Red" Text="测试测试测试测试" HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="Collapsed"/>
+        <Image Name="emailimg" Grid.Row="3" Width="30" Height="30" Margin="230,0,0,0"/>
+
+
+        <TextBox x:Name="phone" Grid.Row="4" Width="200" Height="23" VerticalAlignment="Center" BorderThickness="0,0,0,1" FontSize="16" HorizontalContentAlignment="Center"
+                 LostFocus="Phone_LostFocus"/>
+        <TextBlock Name="phonetip" Foreground="DarkGray" Grid.Row="4"  IsHitTestVisible="False" HorizontalAlignment="Center" Height="23" Text="请输入手机号码" VerticalAlignment="Center"
+                   FontFamily="Microsoft YaHei" FontSize="12">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName=phone}" Value="">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBlock Name="phonewarning" Grid.Row="4" FontSize="8" Foreground="Red" Text="测试测试测试测试" HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="Collapsed"/>
+        <Image Name="phoneimg" Grid.Row="4" Width="30" Height="30" Margin="230,0,0,0"/>
+
+        <Button Name="btnregister" Grid.Row="5" Width="80" Height="30" Click="Btnregister_Click" Margin="0,0,0,15">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate x:Name="btnup" TargetType="{x:Type Button}">
+                                <Grid Width="80" Height="30">
+                                    <TextBlock x:Name="text" Text="现在注册" Grid.Row="3" Foreground="DarkGray" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                    <Image x:Name="bd" Width="25" Height="25" Source="Icons/icons8-signin.png" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter TargetName="bd" Property="Source" Value="Icons/icons8-signin-over.png"/>
+                                        <Setter TargetName="text" Property="Foreground" Value="#666666"/>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="true">
+                                        <Setter TargetName="bd" Property="Source" Value="Icons/icons8-signin-click.png"/>
+                                        <Setter TargetName="text" Property="Foreground" Value="#000000"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+    </Grid>
+</Window>

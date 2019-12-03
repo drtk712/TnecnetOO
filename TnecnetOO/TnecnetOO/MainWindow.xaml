@@ -4,9 +4,146 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TnecnetOO"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+                Background="{x:Null}"
+        WindowStyle="None" AllowsTransparency="True"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded"
+        Title="疼讯OO-v0.5.1" Icon="Icons/icons8-chat-64.png"
+        Height="550" Width="280"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        Closing="Window_Closing"
+        Closed="Window_Closed">
+    <Window.Resources>
+        <ContextMenu x:Key="ContextMenu">
+            <MenuItem Name="ContextmenuChat" Header="开始聊天" Click="ContextmenuChat_Click"/>
+            <Separator></Separator>
+            <MenuItem Name="ContextMenuDelete" Header="删除好友" Click="ContextMenuDelete_Click"/>
+        </ContextMenu>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <Border Grid.RowSpan="3" BorderBrush="Gray" BorderThickness="3" CornerRadius="20" Opacity="1" Background="White"/>
+
+        <Grid Grid.Row="0">
+            <Border BorderThickness="0" CornerRadius="19,19,0,0" Margin="3" Opacity="0.5">
+                <Border.Background>
+                    <ImageBrush ImageSource="Images/MainWindowBg.jpg"/>
+                </Border.Background>
+            </Border>
+            <Border Grid.Row="0" CornerRadius="10" Background="LightBlue" Width="70" Height="70" HorizontalAlignment="Left" Margin="15,0,0,20">
+                <TextBlock Name="usernameheader" Text="测" FontSize="42" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Border>
+            <TextBlock Name="username" Text="测试人员" VerticalAlignment="Center" Width="Auto" Margin="95,0,0,35" FontSize="22" FontWeight="Bold"/>
+            <TextBlock Name="useremail" Text="603500521@qq.com" VerticalAlignment="Center" Margin="97,10,0,0" FontSize="10" />
+            <TextBlock Name="usersinature" Text="这是一条测试用签名" VerticalAlignment="Bottom" Margin="28,0,0,13" FontSize="12" />
+            <Button Name="btnClose" Grid.Row="0" Click="BtnClose_Click" Width="25" Height="25" Margin="230,0,0,70">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate x:Name="btnup" TargetType="{x:Type Button}">
+                                    <Image x:Name="bd" Source="Icons/icons8-close.png">
+                                        <Image.Style>
+                                            <Style TargetType="{x:Type Image}">
+                                                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="true">
+                                            <Setter TargetName="bd" Property="RenderTransform">
+                                                <Setter.Value>
+                                                    <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="true">
+                                            <Setter TargetName="bd" Property="Source" Value="Icons/icons8-close-click.png"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Separator VerticalAlignment="Bottom" Margin="0,0,0,0" Width="270"/>
+        </Grid>
+
+        <ListBox Grid.Row="1" Name="friendlist" BorderThickness="1" BorderBrush="Transparent" Background="Transparent" Width="250" HorizontalAlignment="Center">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <EventSetter Event="PreviewMouseDoubleClick" Handler="ListBoxItem_PreviewMouseDoubleClick"/>
+                    <Setter Property="Margin" Value="0,0,0,3"/>
+                    <Setter Property="ContextMenu" Value="{StaticResource ContextMenu}"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                <Grid x:Name="grid" HorizontalAlignment="Left" Width="240" Height="55">
+                                    <Border x:Name="border" CornerRadius="20"/>
+                                    <Border CornerRadius="20" Background="{Binding Background}" Width="40" Height="40" HorizontalAlignment="Left" Margin="15,0,0,0">
+                                        <TextBlock Text="{Binding Header}" FontSize="32" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Border>
+                                    <TextBlock Text="{Binding Name}" Margin="65,12,0,0" FontSize="18"/>
+                                    <TextBlock Text="{Binding LastOnlineTime}" Margin="67,36,0,0" FontSize="8"/>
+                                    <Image Source="Icons/icons8-chat-message.png" Width="20" Height="20" HorizontalAlignment="Left" Margin="50,0,0,36"
+                                           Visibility="{Binding Visibility}"/>
+                                    <Separator VerticalAlignment="Bottom" Width="50"/>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter TargetName="border" Property="Background" Value="#EFF7F7"/>
+                                    </Trigger>
+                                    <Trigger Property="Selector.IsSelected" Value="true">
+                                        <Setter TargetName="border" Property="Background" Value="#D8F8F8"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.Style>
+                <Style TargetType="ListBox">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBox">
+                                <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="0">
+                                    <ScrollViewer Focusable="False">
+                                        <ItemsPresenter/>
+                                    </ScrollViewer>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.Style>
+        </ListBox>
+        <Button Name="btnaddfriend" Grid.Row="2" Click="Btnaddfriend_Click" Width="35" Height="35" BorderThickness="0">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate x:Name="btnup" TargetType="{x:Type Button}">
+                                <Image x:Name="bd" Source="Icons/icons8-add-user.png"/>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter TargetName="bd" Property="Source" Value="Icons/icons8-add-user-over.png"/>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="true">
+                                        <Setter TargetName="bd" Property="Source" Value="Icons/icons8-add-user-click.png"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
     </Grid>
 </Window>

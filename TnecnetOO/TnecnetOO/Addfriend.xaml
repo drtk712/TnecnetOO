@@ -1,0 +1,96 @@
+﻿<Window x:Class="TnecnetOO.Addfriend"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TnecnetOO"
+       WindowStyle="None" AllowsTransparency="True"
+        mc:Ignorable="d" ResizeMode="NoResize" Background="{x:Null}"
+        WindowStartupLocation="CenterScreen"
+        Title="添加好友" Icon="Icons/icons8-chat-64.png"
+        Height="300" Width="300"
+        KeyDown="Window_KeyDown"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.RowSpan="3" CornerRadius="20" Background="White" Margin="10" BorderBrush="DarkGray" BorderThickness="3"/>
+        <Button Name="btnClose" Grid.Row="0" Click="BtnClose_Click"  Width="25" Height="25" Margin="230,0,0,80">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate x:Name="btnup" TargetType="{x:Type Button}">
+                                <Image x:Name="bd" Source="Icons/icons8-close.png">
+                                    <Image.Style>
+                                        <Style TargetType="{x:Type Image}">
+                                            <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter TargetName="bd" Property="RenderTransform">
+                                            <Setter.Value>
+                                                <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="true">
+                                        <Setter TargetName="bd" Property="Source" Value="Icons/icons8-close-click.png"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Image Grid.Row="0" VerticalAlignment="Center" Width="120" Height="120" Margin="0,10,0,0" Source="Icons/icons8-add-user-group-man-man.png"/>
+
+        <TextBox x:Name="friendname" Grid.Row="1" Width="200" Height="23" VerticalAlignment="Center" BorderThickness="0,0,0,1" FontSize="16" HorizontalContentAlignment="Center"
+                 LostFocus="Friendname_LostFocus"/>
+        <TextBlock Name="friendnametip" Foreground="DarkGray"  Grid.Row="1"  IsHitTestVisible="False" HorizontalAlignment="Center" Height="23" Text="请输入对方姓名" VerticalAlignment="Center"
+                   FontFamily="Microsoft YaHei" FontSize="12">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName=friendname}" Value="">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <TextBlock Name="friendnamewarning" Grid.Row="1" FontSize="10" Foreground="Red" Text="测试测试测试测试" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,38,0,0"
+                   Visibility="Collapsed"/>
+        <Image Name="friendnameimg" Grid.Row="1" Width="30" Height="30" Margin="230,0,0,0"/>
+
+        <Button Name="btnadd" Grid.Row="2" Click="Btnadd_Click" Width="35" Height="35" BorderThickness="0">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate x:Name="btnup" TargetType="{x:Type Button}">
+                                <Image x:Name="bd" Source="Icons/icons8-add-user.png"/>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter TargetName="bd" Property="Source" Value="Icons/icons8-add-user-over.png"/>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="true">
+                                        <Setter TargetName="bd" Property="Source" Value="Icons/icons8-add-user-click.png"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+    </Grid>
+</Window>
+
